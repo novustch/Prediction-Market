@@ -27,7 +27,9 @@ You can reference the guide video here:
 
 https://github.com/user-attachments/assets/8f48a641-7edb-4af3-a17e-c5464bfef660
 
----##  Tech Stack
+---
+
+##  Tech Stack
 
 - **Blockchain**: Solana (Devnet/Mainnet)
 - **Smart Contracts**: Anchor Framework 0.29.0 / Rust
