@@ -1,94 +1,323 @@
-# EVM Copy Trading bot 
+#  DecentralizedPredict - A Decentralized Prediction Market
 
-This is a copy trading bot for EVM chains. It uses web scraping to monitor the positions opened by traders sharing their positions on EVM Futures Leaderboard. We then mimic the trade in your account using the Bybit api. MongoDB is the database used in this software. **Bot updated and working (Mar 2025)**
+**A fully decentralized prediction market platform on Solana enabling users to create custom markets, add liquidity, place token-based bets, and automatically resolve outcomes using Switchboard oracles and Anchor smart contracts.**
+
+DecentralizedPredict is an open-source decentralized prediction market built on Solana, allowing users to create, participate, add liquidity, and resolve prediction events using smart contracts.
+
+>  Bet on real-world outcomes. Earn if you're right. Built for transparency, fairness, and community governance.
+
+---
+
+## Features
+
+- **Create Custom Markets** – Users can create prediction markets with custom questions and outcomes
+- **Add Liquidity** – Fund markets to increase liquidity and enable betting
+- **Token-Based Betting** – Place bets on "Yes" or "No" outcomes using dynamic token pricing
+- **Decentralized Smart Contracts** – Trustless and transparent market resolution on Solana
+- **Oracle Integration** – Automatic result fetching using Switchboard oracles
+- **Referral System** – Earn rewards through referral links
+- **User Profiles** – Track your betting history and market participation
+- **Real-time Market Data** – View active, pending, and resolved markets
+
+---
+
+## How it works
+
+You can reference the guide video here:
+
+https://github.com/user-attachments/assets/8f48a641-7edb-4af3-a17e-c5464bfef660
+
+---##  Tech Stack
+
+- **Blockchain**: Solana (Devnet/Mainnet)
+- **Smart Contracts**: Anchor Framework 0.29.0 / Rust
+- **Frontend**: Next.js 15.2.1 + React 19 + TailwindCSS 4.0
+- **Backend**: Node.js + Express 5 + TypeScript
+- **Database**: MongoDB
+- **Oracles**: Switchboard
+- **Wallet Integration**: Solana Wallet Adapter (Phantom)
+
+---
+
+## 📁 Project Structure
+
+```
+Prediction-Market/
+├── backend/                 # Backend API server
+│   ├── src/
+│   │   ├── controller/      # Business logic controllers
+│   │   ├── router/          # API routes
+│   │   ├── model/           # MongoDB models
+│   │   ├── prediction_market_sdk/  # Solana SDK integration
+│   │   └── oracle_service/  # Oracle feed management
+│   ├── package.json
+│   └── README.md
+├── frontend/                # Next.js frontend application
+│   ├── src/
+│   │   ├── app/             # Next.js app router pages
+│   │   ├── components/      # React components
+│   │   ├── providers/       # Context providers
+│   │   └── utils/           # Utility functions
+│   ├── package.json
+│   └── README.md
+├── contracts/               # Anchor smart contracts
+│   ├── programs/
+│   │   └── prediction/      # Rust program source
+│   ├── tests/               # Contract tests
+│   ├── package.json
+│   └── README.md
+├── .github/                 # GitHub templates and workflows
+│   ├── ISSUE_TEMPLATE/      # Issue templates
+│   └── workflows/           # CI/CD workflows
+├── LICENSE                  # ISC License
+├── CONTRIBUTING.md          # Contribution guidelines
+└── README.md                # This file
+```
+
+---
+
+##  Getting Started
+
+### Prerequisites
+
+- **Node.js** v18 or higher
+- **Anchor** 0.29.0
+- **Solana CLI** (latest stable version)
+- **MongoDB** (local or MongoDB Atlas)
+- **Yarn** or **npm** package manager
+- **Rust** (for smart contract development)
+
+### Installation
+
+#### 1. Clone the Repository
+
+```bash
+git clone https://github.com/novustch/Prediction-Market.git
+cd Prediction-Market
+```
+
+#### 2. Install Backend Dependencies
+
+```bash
+cd backend
+npm install
+# or
+yarn install
+```
+
+#### 3. Install Frontend Dependencies
+
+```bash
+cd ../frontend
+npm install
+# or
+yarn install
+```
+
+#### 4. Install Smart Contract Dependencies
+
+```bash
+cd ../contracts
+npm install
+# or
+yarn install
+```
+
+---
+
+## ⚙️ Configuration
+
+### Backend Environment Variables
+
+Create a `.env` file in the `backend` directory:
+
+```env
+PORT=9000
+DB_URL=your_mongodb_connection_string
+PASSKEY=your_passkey
+FEE_AUTHORITY=your_fee_authority_public_key
+```
+
+You can copy from the example file:
+```bash
+cd backend
+cp env.example .env
+# Then edit .env with your actual values
+```
+
+### Frontend Configuration
+
+The frontend is configured to connect to Solana Devnet by default. You can modify the RPC endpoint in `frontend/src/app/layout.tsx` if needed.
+
+### Smart Contract Configuration
+
+The smart contract is configured for Solana Devnet. Check `contracts/Anchor.toml` for configuration details.
+
+---
+
+##  Running the Application
+
+### Backend Server
+
+```bash
+cd backend
+
+# Development mode (with hot reload)
+npm run dev
+# or
+yarn dev
+
+# Production mode
+npm start
+# or
+yarn start
+```
+
+The backend server will run on `http://localhost:9000` (or the port specified in your `.env` file).
+
+### Frontend Application
+
+```bash
+cd frontend
+
+# Development mode
+npm run dev
+# or
+yarn dev
+
+# Production build
+npm run build
+npm start
+# or
+yarn build
+yarn start
+```
+
+The frontend will be available at `http://localhost:3000`.
+
+### Smart Contract
+
+```bash
+cd contracts
+
+# Build the contract
+anchor build
+
+# Deploy to devnet
+anchor deploy
+
+# Run tests
+anchor test
+```
+
+---
+
+##  API Endpoints
+
+The backend provides the following API endpoints (all prefixed with `/api`):
+
+### Market Endpoints
+- `POST /api/market/create` - Create a new prediction market
+- `POST /api/market/add` - Add additional market information
+- `POST /api/market/addLiquidity` - Add liquidity to a market
+- `POST /api/market/betting` - Place a bet on a market
+- `POST /api/market/liquidity` - Alternative liquidity endpoint
+- `GET /api/market/get` - Get market data
+
+### Oracle Endpoints
+- `POST /api/oracle/registFeed` - Register a custom oracle feed
+
+### Referral Endpoints
+- `POST /api/referral/` - Get or generate referral code
+- `POST /api/referral/claim` - Claim referral rewards
+
+### Profile Endpoints
+- `GET /api/profile/` - Get user profile data
+
+---
+
+##  How It Works
+
+1. **Create Market** – A user creates a prediction event with a question (e.g., "Will BTC hit $80k by Dec 2025?")
+2. **Add Liquidity** – Users can fund markets to increase liquidity. Once a threshold is reached, betting becomes active.
+3. **Participants Bet** – Users place stakes on "Yes" or "No" outcomes by purchasing tokens. Token prices fluctuate based on market probability.
+4. **Locking Period** – Market closes at deadline; no more bets are accepted.
+5. **Resolution** – Oracle fetches real-world outcome automatically from Switchboard feeds.
+6. **Payout** – Winners are rewarded proportionally based on their token holdings.
+
+### Market States
+
+- **Pending** – Market created but liquidity threshold not met
+- **Active** – Market is open for betting
+- **Resolved** – Oracle has determined the outcome, winners can claim rewards
+
+---
+
+##  Development
+
+### Backend Development
+
+The backend uses TypeScript with Express. Key directories:
+- `src/controller/` - Business logic
+- `src/router/` - API route definitions
+- `src/model/` - MongoDB schemas
+- `src/prediction_market_sdk/` - Solana blockchain interactions
+
+### Frontend Development
+
+The frontend uses Next.js 15 with the App Router. Key directories:
+- `src/app/` - Pages and routes
+- `src/components/` - Reusable React components
+- `src/providers/` - Context providers for global state
+
+### Smart Contract Development
+
+The smart contract is written in Rust using the Anchor framework:
+- `programs/prediction/src/` - Main program logic
+- `programs/prediction/src/instructions/` - Individual instruction handlers
+- `programs/prediction/src/states/` - Account state definitions
+
+---
+
+##  Testing
+
+### Smart Contract Tests
+
+```bash
+cd contracts
+anchor test
+```
+
+### Backend Tests
+
+Currently, backend tests are not configured. You can add test scripts to `backend/package.json`.
+
+---
+
+## 📄 License
+
+This project is licensed under the ISC License - see the [LICENSE](LICENSE) file for details.
+
+## 🤝 Contributing
+
+Contributions are welcome! Please read our [Contributing Guidelines](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
+
+---
 
 ## Contact
 
-| Platform | Link |
-|----------|------|
-| 📱 Telegram | [t.me/novustch](https://t.me/novustch) |
-| 📲 WhatsApp | [wa.me/14105015750](https://wa.me/14105015750) |
-| 💬 Discord | [discordapp.com/users/985432160498491473](https://discordapp.com/users/985432160498491473)
+If you have any questions or would like a more customized app for specific use cases, please feel free to contact us:
 
-<div align="left">
-    <a href="https://t.me/novustch" target="_blank"><img alt="Telegram"
-        src="https://img.shields.io/badge/Telegram-26A5E4?style=for-the-badge&logo=telegram&logoColor=white"/></a>
-    <a href="https://wa.me/14105015750" target="_blank"><img alt="WhatsApp"
-        src="https://img.shields.io/badge/WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white"/></a>
-    <a href="https://discordapp.com/users/985432160498491473" target="_blank"><img alt="Discord"
-        src="https://img.shields.io/badge/Discord-7289DA?style=for-the-badge&logo=discord&logoColor=white"/></a>
-</div>
+- **GitHub**: [Prediction-Market](https://github.com/novustch/Prediction-Market.git)
+- **Telegram**: [@novustch](https://t.me/novustch)
+- **Twitter/X**: [@novustch](https://x.com/novustch)
 
-Feel free to reach out for implementation assistance or integration support.
+---
 
-## Running the bot on your own
+## Acknowledgments
 
-### Environment setup (Recommended)
-
-#### Using Conda
-
-At your target directory, execute the following:
-
-```bash
-conda create -n trading python=3.10 -y
-conda activate trading
-git clone https://github.com/novustch/Copy-Trading-Bot.git
-cd Copy-Trading-Bot
-pip install -r requirements.txt
-```
-
-### Database Setup
-
-Follow the instructions in https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-ubuntu/ to set up MongoDB on the same host where the program is run.  
-Follow https://www.digitalocean.com/community/tutorials/how-to-secure-mongodb-on-ubuntu-20-04 to set up username and password.  
-
-### Software setup 
-
-1. Setup a telegram bot using `Botfather` (details on telegram official site) and mark the access token.
-2. Setup a discord channel for urgent/alert messages, and get a webhook url. (Reason is to avoid mixing them into the telegram channel and missing out on them.)
-3. Fill in the required fields in  `app/data/credentials.py`
-4. Run `python -m  app.ct_main` and `python -m app.tgb_main`. It is suggested to set both up as a systemctl service, with restart=always and a MaxRunTime so that the program is automatically restarted from time to time.
-5. Call `/addcookie` to add credentials required for api end-points every 2-3 days. I will not teach you how to do so here, but you can find the information on the internet.
-
-### Using the software
-
-After the python programs are up and running, go to your telegram bot and type /start, then follow the instructions.  
-It should be rather straightforward but if you encounter any uncertainties, please report it to me by raising an issue.  
-Refer to the file telegram-commands.txt for a list of commands you can use.  
-I personally suggest you go to the EVM leaderboard, pick a longer timespan (e.g. monthly or all-time) and choose the top traders sharing their positions.  
-
-### Contributing
-
-We welcome contributions to improve EVM-Copy-Trading-bot! Here's how you can help:
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-Please make sure to:
-- Follow the existing code style
-- Add tests if applicable
-- Update documentation as needed
-- Reference any related issues in your PR
-
-### License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-### Disclaimer
-
-- Users are solely responsible for their own trading decisions and the management of their accounts. TraderCloneX is not a financial advisor, and any information provided by the bot should not be taken as financial advice. Users should conduct their own due diligence and consider seeking advice from an independent financial advisor.
-- TraderCloneX does not accept any liability for loss or damage as a result of reliance on the information contained within this bot. Please be fully informed regarding the risks and costs associated with trading the financial markets. While we strive to ensure our service is both fast and reliable, TraderCloneX cannot guarantee the uptime or data accuracy of the service. Access to the bot during the launch phase is limited to users who sign up using our Bybit referral link, and this condition may be subject to change in the future.
-- By using TraderCloneX, you acknowledge and agree that you have read, understood, and accept the full terms of this disclaimer. You agree that all use of the TraderCloneX service is at your own risk, and you are fully responsible for any resulting profits or losses.
-- Remember that trading can lead to losses that exceed initial investments. Therefore, you should not trade with capital that you cannot afford to lose. If you have any doubts, it is advisable to seek advice from an independent financial advisor.
-
-### Support the Project
-
-If you find this project useful, consider supporting it in one of these ways:
-- Star the repository
-- Report bugs or suggest features by creating issues
-- Submit pull requests
-- Share the project with others
-
+Built with:
+- [Solana](https://solana.com/)
+- [Anchor Framework](https://www.anchor-lang.com/)
+- [Next.js](https://nextjs.org/)
+- [Switchboard](https://switchboard.xyz/)

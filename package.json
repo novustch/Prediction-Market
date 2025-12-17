@@ -1,0 +1,43 @@
+{
+  "name": "DecentralizedPredict",
+  "version": "1.0.0",
+  "description": "DecentralizedPredict - A Decentralized Prediction Market on Solana",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend",
+    "contracts"
+  ],
+  "scripts": {
+    "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install && cd ../contracts && npm install",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "build:backend": "cd backend && npm run build",
+    "build:frontend": "cd frontend && npm run build",
+    "build:contracts": "cd contracts && anchor build",
+    "test:contracts": "cd contracts && anchor test",
+    "lint:backend": "cd backend && npm run lint || true",
+    "lint:frontend": "cd frontend && npm run lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/novustch/Prediction-Market.git"
+  },
+  "keywords": [
+    "solana",
+    "Prediction-Market",
+    "blockchain",
+    "anchor",
+    "decentralized",
+    "defi",
+    "nextjs",
+    "typescript"
+  ],
+  "author": "NovusTechLLC",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/novustch/Prediction-Market/issues"
+  },
+  "homepage": "https://github.com/novustch/Prediction-Market#readme"
+}
+
