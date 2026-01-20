@@ -1,7 +1,7 @@
 {
-  "name": "DecentralizedPredict",
+  "name": "checkbrice",
   "version": "1.0.0",
-  "description": "DecentralizedPredict - A Decentralized Prediction Market on Solana",
+  "description": "CheckBrice - Simple Prediction Markets on Solana",
   "private": true,
   "workspaces": [
     "backend",

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "cd frontend && npm install && npm run build",
+  "outputDirectory": "frontend/.next",
+  "devCommand": "cd frontend && npm run dev",
+  "installCommand": "npm install",
+  "framework": "nextjs",
+  "regions": ["iad1"],
+  "env": {
+    "NEXT_PUBLIC_API_URL": "https://checkbrice.com/api",
+    "NEXT_PUBLIC_SOLANA_NETWORK": "devnet"
+  },
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "backend/src/index.ts"
+    }
+  ]
+}

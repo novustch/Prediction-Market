@@ -10,6 +10,7 @@ import "@solana/wallet-adapter-react-ui/styles.css";
 import { PhantomWalletAdapter } from '@solana/wallet-adapter-phantom';
 import { clusterApiUrl } from '@solana/web3.js';
 import { ToastContainer } from "react-toastify";
+import { Toaster } from "react-hot-toast";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,6 +38,7 @@ export default function RootLayout({
           <WalletProvider wallets={wallets} autoConnect>
             <WalletModalProvider>
               <ToastContainer />
+              <Toaster position="top-center" />
               <GlobalProvider>
                 <Layout>{children}</Layout>
               </GlobalProvider>
