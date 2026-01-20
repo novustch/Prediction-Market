@@ -16,7 +16,13 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        primary: "#07B3FF",
+        // CheckBrice colors (from zillaz.net)
+        primary: "#D94F30",      // Red-orange primary
+        secondary: "#FF6B35",    // Orange accent
+        navy: "#2C3E50",         // Dark blue background
+        cream: "#F5EFE0",        // Beige/cream background
+        yes: "#10B981",          // Green for YES
+        no: "#EF4444",           // Red for NO
       },
       fontFamily: {
         anton: ["anton"],
