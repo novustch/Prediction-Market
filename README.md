@@ -1,10 +1,10 @@
-#  DecentralizedPredict - A Decentralized Prediction Market
+#  CheckBrice - Simple Prediction Markets
 
-**A fully decentralized prediction market platform on Solana enabling users to create custom markets, add liquidity, place token-based bets, and automatically resolve outcomes using Switchboard oracles and Anchor smart contracts.**
+**The easiest way to predict Bitcoin prices and earn. Built on Solana for fast, cheap transactions.**
 
-DecentralizedPredict is an open-source decentralized prediction market built on Solana, allowing users to create, participate, add liquidity, and resolve prediction events using smart contracts.
+CheckBrice is a super simple prediction market focused on Bitcoin. No complicated interfaces, no confusing terms - just predict and win.
 
->  Bet on real-world outcomes. Earn if you're right. Built for transparency, fairness, and community governance.
+>  Will Bitcoin hit $100k? Make your prediction. Win money if you're right. It's that simple.
 
 ---
 

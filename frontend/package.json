@@ -1,8 +1,8 @@
 {
-  "name": "Prediction-Market-frontend",
+  "name": "checkbrice-frontend",
   "version": "0.1.0",
   "private": true,
-  "description": "Frontend application for DecentralizedPredict - A Decentralized Prediction Market on Solana",
+  "description": "CheckBrice - Simple prediction markets for everyone",
   "author": "NovusTechLLC",
   "license": "ISC",
   "repository": {
