@@ -46,7 +46,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/react-icons": "^3.0.0",
-    "@types/react-toastify": "^1.0.0",
+    "@types/react-toastify": "^4.1.0",
     "eslint": "^9",
     "eslint-config-next": "15.2.1",
     "tailwindcss": "^4.0.12",
